@@ -1,0 +1,15 @@
+
+  <div class="container">
+    <h2 class="text-center mb-5">Which one is your preferred choice?</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let category of categories">
+        <div class="card category-card" (click)="navigateToProducts(category.name)">
+          <img [src]="category.image" class="card-img-top" [alt]="category.name" (error)="onImageError($event)">
+          <div class="card-body text-center">
+            <h5 class="card-title text-primary">{{ category.name }}</h5>
+            <p class="card-text text-warning">{{ category.action }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

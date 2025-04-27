@@ -1,0 +1,103 @@
+<div class="container mt-4">
+    <!-- Error message if API fails -->
+    <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
+  
+    <!-- Product details -->
+    <div *ngIf="product; else loading" class="row">
+      <!-- Left Column: Images -->
+      <div class="col-md-6">
+        <div class="main-image mb-3">
+          <img [src]="mainImage" [alt]="product.title" class="img-fluid" (error)="onImageError($event)">
+        </div>
+        <div class="thumbnail-gallery d-flex flex-wrap gap-2">
+          <img *ngFor="let image of product.images" [src]="image" [alt]="product.title" (click)="mainImage = image" (error)="onImageError($event)" class="thumbnail">
+        </div>
+      </div>
+  
+
+     
+        
+         
+      <!-- Right Column: Product Details -->
+      <div class="col-md-6">
+        <!-- Category Breadcrumb -->
+        <div class="category-path mb-2">
+          <small>Categories: {{ product.category }} / {{ product.subcategory }}</small>
+        </div>
+  
+        <!-- Title -->
+        <h1 class="product-title">{{ product.title }}</h1>
+  
+        <!-- Rating -->
+        <div class="rating mb-2">
+            <span class="stars">
+              <ng-container *ngFor="let star of getStars()">
+                <span class="star" [ngClass]="{'star-filled': star.filled, 'star-half': star.half, 'star-empty': !star.filled && !star.half}">★</span>
+              </ng-container>
+            </span>
+            <span class="review-count">({{ product.reviews_count }})</span>
+          </div>
+  
+        <!-- Price -->
+        <h2 class="product-price">{{ product.total_price }}</h2>
+  
+        <!-- Specifications -->
+        <div class="specifications mb-3">
+          <p><strong>Product Type:</strong> {{ product.subcategory }}</p>
+          <p *ngIf="product.product_specifications && product.product_specifications.length">
+            <strong>Manufacturer Model Number:</strong> {{ product.product_specifications[0].specification_name === 'Model' ? product.product_specifications[0].specification_value : 'N/A' }}
+          </p>
+          <p *ngIf="product.product_specifications && product.product_specifications.length > 1">
+            <strong>Supported Host Device OS:</strong> {{ product.product_specifications[1].specification_name === 'OS Compatibility' ? product.product_specifications[1].specification_value : 'N/A' }}
+          </p>
+        </div>
+  
+        <!-- Quantity Selector -->
+        <div class="quantity-selector mb-3 d-flex align-items-center">
+          <label for="quantity" class="me-2">Quantity:</label>
+          <button class="btn btn-outline-secondary btn-sm" (click)="decreaseQuantity()">-</button>
+          <input type="text" id="quantity" class="form-control quantity-input" [value]="quantity" readonly>
+          <button class="btn btn-outline-secondary btn-sm" (click)="increaseQuantity()">+</button>
+        </div>
+  
+        <!-- Action Buttons -->
+        <!-- <div class="action-buttons mb-3 d-flex gap-2">
+          <button class="btn btn-add-to-cart" (click)="addToCart()">Add to Cart</button>
+          <button class="btn btn-buy-now" (click)="buyNow()">Buy Now</button>
+        </div> -->
+  
+        <div class="action-buttons mb-3 d-flex gap-3">
+            <button class="btn btn-add-to-cart" (click)="addToCart()">Add to Cart</button>
+            <button class="btn btn-buy-now" (click)="buyNow()">Buy Now</button>
+          </div>
+
+        <!-- Return Policy -->
+        <div class="return-policy mb-3">
+          <small><strong>Return Policy:</strong> {{ product.return_policy || 'Not specified' }}</small>
+        </div>
+  
+        <!-- About this item -->
+        <div class="about-item mb-3">
+          <h5>About this item</h5>
+          <ul class="tick-list">
+            <li *ngFor="let desc of product.product_description">
+              <i class="fas fa-check-circle tick-icon"></i>{{ desc }}
+            </li>
+          </ul>
+        </div>
+  
+        <!-- Tags -->
+        <div class="tags d-flex flex-wrap gap-2">
+          <span *ngFor="let tag of product.tags" class="tag badge">{{ tag }}</span>
+        </div>
+  
+        <!-- Back to Products Button -->
+        <button class="btn btn-link mt-3 p-0" (click)="goBack()">Back to Products</button>
+      </div>
+    </div>
+  
+    <!-- Loading State -->
+    <ng-template #loading>
+      <p class="text-center">Loading product details...</p>
+    </ng-template>
+  </div>

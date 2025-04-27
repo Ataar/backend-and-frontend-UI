@@ -1,0 +1,29 @@
+
+  <div class="container">
+    <h2 class="text-center mb-4">{{ category }} Products</h2>
+    <div class="row" *ngIf="products.length; else noProducts">
+      <div class="col-md-4 mb-4" *ngFor="let product of products">
+        <div class="card product-card" (click)="navigateToProduct(product._id)">
+       <img 
+
+            [src]="product.images[product.currentImageIndex]" 
+            class="card-img-top" 
+            [alt]="product.title" 
+            *ngIf="product.images && product.images.length" 
+            (error)="onImageError($event)" 
+            (mouseenter)="onImageHover(product)" 
+            (mouseleave)="onImageLeave(product)"> 
+
+            
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">{{ product.total_price }}</p>
+            <p class="card-text">Rating: {{ product.rating }} ({{ product.reviews_count }} reviews)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noProducts>
+      <p class="text-center">No products found in this category.</p>
+    </ng-template>
+  </div>
