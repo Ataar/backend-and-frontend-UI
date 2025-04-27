@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://your-backend-url.com' // TODO: Replace with deployed backend URL after deployment
+  baseUrl: 'https://ecom-backend-murex.vercel.app/' // TODO: Replace with deployed backend URL after deployment
 };
