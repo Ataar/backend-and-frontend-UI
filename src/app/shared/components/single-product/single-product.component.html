@@ -54,10 +54,12 @@
   
         <!-- Quantity Selector -->
         <div class="quantity-selector mb-3 d-flex align-items-center">
-          <label for="quantity" class="me-2">Quantity:</label>
-          <button class="btn btn-outline-secondary btn-sm" (click)="decreaseQuantity()">-</button>
-          <input type="text" id="quantity" class="form-control quantity-input" [value]="quantity" readonly>
-          <button class="btn btn-outline-secondary btn-sm" (click)="increaseQuantity()">+</button>
+          <label for="quantity" class="me-2">Quantity :</label>
+   
+            <button class="btn btn-outline-secondary btn-sm" (click)="decreaseQuantity()">-</button>
+            <input type="text" id="quantity" class="form-control quantity-input" [value]="quantity" readonly>
+            <button class="btn btn-outline-secondary btn-sm" (click)="increaseQuantity()">+</button>
+  
         </div>
   
         <!-- Action Buttons -->

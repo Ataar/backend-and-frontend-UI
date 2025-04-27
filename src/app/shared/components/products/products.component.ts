@@ -26,7 +26,8 @@ export class ProductsComponent implements OnInit {
       this.productService.fetchProductsByCategory(this.category).subscribe({
         next: (products) => {
          
-          this.products = products.map(product => ({
+          this.products = products
+          .map(product => ({
             ...product,
             currentImageIndex: 0 
           }));
