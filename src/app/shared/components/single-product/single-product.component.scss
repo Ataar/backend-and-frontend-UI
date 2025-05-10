@@ -1,4 +1,14 @@
-@import '~@fortawesome/fontawesome-free/css/all.css';
+
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+$primary-color: #dc3545;
+$dark-color: #343a40;
+$border-radius: 8px;
+$thumbnail-size: 60px;
+
+// Then replace all instances with these variables
+
+// Then replace all instances with these variables
 
 .main-image img {
     width: 100%;
@@ -8,24 +18,11 @@
   }
   
 
-  .main-image img {
-    width: 100%;
-    max-height: 350px;
-    object-fit: contain;
-    border-radius: 8px;
-    // margin: auto -32px
-}
-//   .thumbnail {
-//     width: 60px;
-//     height: 60px;
-//     object-fit: cover;
-//     cursor: pointer;
-//     border: 1px solid #ddd;
-//     border-radius: 5px;
-//     &:hover {
-//       border-color: #007bff;
-//     }
-//   }
+
+
+
+
+
 
 .thumbnail{
     width: 60px;
@@ -39,35 +36,33 @@
     
 }
 
-@media(max-width:375px)
-{
-  .thumbnail{
+
+
+
+
+@media (max-width: 375px), (max-width: 320px) {
+  .thumbnail {
     width: 60px;
     height: 60px;
     object-fit: cover;
     cursor: pointer;
     border: 1px solid #070505;
     border-radius: 5px;
+    padding: 5px;
+  }
+}
+
+// Then add the specific margin adjustments:
+@media (max-width: 375px) {
+  .thumbnail {
     margin: 5px 0 8px 34px;
-    padding: 5px;
-    
-}
+  }
 }
 
-
-@media(max-width:320px)
-{
-  .thumbnail{
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    cursor: pointer;
-    border: 1px solid #070505;
-    border-radius: 5px;
+@media (max-width: 320px) {
+  .thumbnail {
     margin: 5px 0 8px 52px;
-    padding: 5px;
-    
-}
+  }
 }
   
   
@@ -154,25 +149,22 @@
 
 
   .action-buttons {
-    .btn-add-to-cart {
-      background-color: #dc3545; // Red button
+    gap: 1rem !important;
+    .btn-add-to-cart, .btn-buy-now {
       color: white;
       border: none;
       padding: 0.5rem 1.5rem;
       &:hover {
-        background-color: darken(#dc3545, 10%);
+        background-color: dark(currentColor, 10%);
       }
+    }
+    .btn-add-to-cart {
+      background-color: #dc3545;
     }
     .btn-buy-now {
-      background-color: #343a40; // Dark button
-      color: white;
-      border: none;
-      padding: 0.5rem 1.5rem;
-      &:hover {
-        background-color: darken(#343a40, 10%);
-      }
+      background-color: #343a40;
     }
-  }
+}
   
   .return-policy {
     small {
