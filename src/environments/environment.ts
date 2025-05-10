@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000' // Backend URL
+  baseUrl : `https://ecom-backend-omega-six.vercel.app`
 };
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

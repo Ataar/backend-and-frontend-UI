@@ -33,7 +33,12 @@
               "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+           "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
           },
           "configurations": {
             "production": {
@@ -68,22 +73,26 @@
           },
           "defaultConfiguration": "production"
         },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "routing:build:production"
-            },
-            "development": {
-              "browserTarget": "routing:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
+       "serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "routing:build"
+  },
+  "configurations": {
+    "production": {
+      "browserTarget": "routing:build:production"
+    },
+    "development": {
+      "browserTarget": "routing:build:development"
+    }
+  },
+  "defaultConfiguration": "development"
+},
+
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "routing:build"
+          
           }
         },
         "test": {

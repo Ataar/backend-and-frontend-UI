@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container my-3">
     <!-- Error message if API fails -->
     <div *ngIf="errorMessage" class="alert alert-danger text-center">{{ errorMessage }}</div>
   
@@ -21,7 +21,7 @@
       <!-- Right Column: Product Details -->
       <div class="col-md-6">
         <!-- Category Breadcrumb -->
-        <div class="category-path mb-2">
+        <div class="category-path mt-3">
           <small>Categories: {{ product.category }} / {{ product.subcategory }}</small>
         </div>
   
@@ -29,38 +29,57 @@
         <h1 class="product-title">{{ product.title }}</h1>
   
         <!-- Rating -->
-        <div class="rating mb-2">
+        <!-- <div class="rating mb-2">
             <span class="stars">
               <ng-container *ngFor="let star of getStars()">
                 <span class="star" [ngClass]="{'star-filled': star.filled, 'star-half': star.half, 'star-empty': !star.filled && !star.half}">★</span>
               </ng-container>
             </span>
             <span class="review-count">({{ product.reviews_count }})</span>
+          </div> -->
+
+
+          <div class="rating mb-2">
+            <span class="stars">
+              <ng-container *ngFor="let star of getStars()">
+                <span class="material-icons"
+                  [ngClass]="{
+                    'filled': star.filled,
+                    'half': star.half && !star.filled,
+                    'empty': !star.filled && !star.half
+                  }">
+                  {{ star.filled ? 'star' : (star.half ? 'star_half' : 'star_border') }}
+                </span>
+              </ng-container>
+              <span class="review-count mt-1">({{ product.reviews_count }})</span>
+            </span>
           </div>
+          
   
         <!-- Price -->
         <h2 class="product-price">{{ product.total_price }}</h2>
   
         <!-- Specifications -->
         <div class="specifications mb-3">
-          <p><strong>Product Type:</strong> {{ product.subcategory }}</p>
+          <p><strong>Product Type :</strong> {{ product.subcategory }}</p>
           <p *ngIf="product.product_specifications && product.product_specifications.length">
-            <strong>Manufacturer Model Number:</strong> {{ product.product_specifications[0].specification_name === 'Model' ? product.product_specifications[0].specification_value : 'N/A' }}
+            <strong>Manufacturer Model Number :</strong> {{ product.product_specifications[0].specification_name === 'Model' ? product.product_specifications[0].specification_value : 'N/A' }}
           </p>
           <p *ngIf="product.product_specifications && product.product_specifications.length > 1">
-            <strong>Supported Host Device OS:</strong> {{ product.product_specifications[1].specification_name === 'OS Compatibility' ? product.product_specifications[1].specification_value : 'N/A' }}
+            <strong>Supported Host Device OS :</strong> {{ product.product_specifications[1].specification_name === 'OS Compatibility' ? product.product_specifications[1].specification_value : 'N/A' }}
           </p>
         </div>
   
         <!-- Quantity Selector -->
-        <div class="quantity-selector mb-3 d-flex align-items-center">
-          <label for="quantity" class="me-2">Quantity :</label>
-   
-            <button class="btn btn-outline-secondary btn-sm" (click)="decreaseQuantity()">-</button>
-            <input type="text" id="quantity" class="form-control quantity-input" [value]="quantity" readonly>
-            <button class="btn btn-outline-secondary btn-sm" (click)="increaseQuantity()">+</button>
-  
-        </div>
+       <div class="quantity-selector mb-3 d-flex align-items-center">
+          <label for="quantity" class="me-2 mr-2">Quantity :</label>
+          <button class="btn btn-outline-secondary btn-lg btn01" (click)="decreaseQuantity()">-</button>
+          <input type="text" id="quantity" class="form-control quantity-input" [value]="quantity" readonly>
+          <button class="btn btn-outline-secondary btn-lg btn02" (click)="increaseQuantity()">+</button>
+        </div> 
+
+    
+
   
         <!-- Action Buttons -->
         <!-- <div class="action-buttons mb-3 d-flex gap-2">
@@ -89,17 +108,26 @@
         </div>
   
         <!-- Tags -->
-        <div class="tags d-flex flex-wrap gap-2">
+        <div class="tags d-flex flex-wrap gap-4">
           <span *ngFor="let tag of product.tags" class="tag badge">{{ tag }}</span>
         </div>
   
         <!-- Back to Products Button -->
-        <button class="btn btn-link mt-3 p-0" (click)="goBack()">Back to Products</button>
+        <!-- <button class="btn btn-link mt-3 p-0" (click)="goBack()">Back to Products</button> -->
+        <div class="d-flex gap-3 mt-4">
+          <button class="btn btn-secondary" (click)="goBack()">← Back</button>
+        </div>
+        
       </div>
     </div>
   
     <!-- Loading State -->
     <ng-template #loading>
-      <p class="text-center">Loading product details...</p>
+      <div class="loading-container">
+        <div class="text-center">
+          <div class="spinner-border text-primary mb-3" role="status"></div>
+          <p>Loading product details...</p>
+        </div>
+      </div>
     </ng-template>
-  </div>
+    

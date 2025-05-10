@@ -1,4 +1,18 @@
+// import { Component, OnInit } from '@angular/core';
 
+// @Component({
+//   selector: 'app-dashboard',
+//   templateUrl: './dashboard.component.html',
+//   styleUrls: ['./dashboard.component.scss']
+// })
+// export class DashboardComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit(): void {
+//   }
+
+// }
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -29,4 +43,6 @@ export class DashboardComponent {
     (event.target as HTMLImageElement).src = 'assets/placeholder.jpg'; // Ensure placeholder.jpg exists
     console.log('Image failed to load:', (event.target as HTMLImageElement).src);
   }
+
+ 
 }

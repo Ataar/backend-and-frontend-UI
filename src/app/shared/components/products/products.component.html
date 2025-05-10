@@ -1,11 +1,15 @@
 
-  <div class="container">
-    <h2 class="text-center mb-4">{{ category }} Products</h2>
+
+
+
+<h2 class="heading">{{ category }} Products</h2>
+<div class="container">
+
+  <div *ngIf="!loading; else loaderTemplate">
     <div class="row" *ngIf="products.length; else noProducts">
       <div class="col-md-4 mb-4" *ngFor="let product of products">
-        <div class="card product-card" (click)="navigateToProduct(product._id)">
-       <img 
-
+        <div class="card product-card h-100" (click)="navigateToProduct(product._id)">
+          <img 
             [src]="product.images[product.currentImageIndex]" 
             class="card-img-top" 
             [alt]="product.title" 
@@ -13,8 +17,6 @@
             (error)="onImageError($event)" 
             (mouseenter)="onImageHover(product)" 
             (mouseleave)="onImageLeave(product)"> 
-
-            
           <div class="card-body">
             <h5 class="card-title">{{ product.title }}</h5>
             <p class="card-text">{{ product.total_price }}</p>
@@ -23,7 +25,43 @@
         </div>
       </div>
     </div>
-    <ng-template #noProducts>
-      <p class="text-center">No products found in this category.</p>
-    </ng-template>
   </div>
+
+  <!-- Loader Template -->
+  <ng-template #loaderTemplate>
+    <div class="custom-loader-wrapper">
+      <div class="text-center">
+        <div class="spinner-border text-primary custom-spinner" role="status"></div>
+        <p class="loading-text mt-3">Loading products, please wait...</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- No Products Template -->
+  <ng-template #noProducts>
+    <p class="text-center">No products found in this category.</p>
+  </ng-template>
+
+  <!-- Back Button -->
+  <!-- <div class="text-center mt-4">
+    <a routerLink="home" class="back-link d-inline-flex align-items-center">
+      <img src="https://static.thenounproject.com/png/2819176-200.png" alt="Back Icon" width="24" height="24">
+      <span class="ms-2">Back</span>
+    </a>
+  </div> -->
+  
+</div>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" (click)="scrollToTop()" *ngIf="showScrollTopBtn">
+  ↑
+</button>
+
+
+<div>
+  <a routerLink="home" class="back-link" (click)="goBack()">
+    <img src="https://static.thenounproject.com/png/2819176-200.png" alt="Back Icon">
+    <span class="ms-2">Back</span>
+  </a>
+</div>
+    

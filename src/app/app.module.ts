@@ -37,7 +37,8 @@ import { SingleProductComponent } from './shared/components/single-product/singl
     MatIconModule,
     MatListModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+   
   ],
   providers: [],
   bootstrap: [AppComponent]

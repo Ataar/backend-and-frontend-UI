@@ -1,9 +1,9 @@
 
-
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { Product } from '../../module/product';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -12,12 +12,17 @@ import { Product } from '../../module/product';
 })
 export class ProductsComponent implements OnInit {
   category: string = '';
+ loading = true; // Initially loading is true
+
+
   products: (Product & { currentImageIndex: number })[] = []; // Extend Product to include currentImageIndex
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private _location : Location
+
   ) {}
 
   ngOnInit() {
@@ -25,20 +30,31 @@ export class ProductsComponent implements OnInit {
     if (this.category) {
       this.productService.fetchProductsByCategory(this.category).subscribe({
         next: (products) => {
-         
-          this.products = products
-          .map(product => ({
+          // Initialize currentImageIndex for each product
+          this.products = products.map(product => ({
             ...product,
-            currentImageIndex: 0 
+            currentImageIndex: 0 // Default to first image
           }));
+          this.loading = false;
         },
         error: (err) => {
           console.error('Error fetching products:', err);
           this.products = [];
+          this.loading = false;
         }
       });
     }
+    else
+    {
+      this.loading = false;
+    }
   }
+
+
+ 
+ 
+
+
 
   // On mouse enter, show the second image (index 1)
   onImageHover(product: Product & { currentImageIndex: number }) {
@@ -59,6 +75,31 @@ export class ProductsComponent implements OnInit {
   onImageError(event: Event) {
     (event.target as HTMLImageElement).src = 'assets/placeholder.jpg';
   }
+
+  goBack() {
+    this._location.back();
+    
+  }
+
+
+  // -----------------------------------------
+  // goForward() {
+  //   this._location.forward();
+  // }
+  
+  showScrollTopBtn = false;
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    // Show button after scrolling down 300px
+    this.showScrollTopBtn = window.pageYOffset > 300;
+  }
+  
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+  
+  
 }
 
 

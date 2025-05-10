@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
 
-
+  // **************  Toggle function *******************
 
 isNavbarCollapsed = true;
 toggleNavbar() {
